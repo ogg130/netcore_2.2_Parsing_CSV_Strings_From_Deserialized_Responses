@@ -52,9 +52,9 @@ namespace ParseCSVFromJson.Controllers
                     // This inner loop is looping over each key value pair item in each chunk
 
                     // For example, the first chunk would iterated over like such:
-                    //      Key: LAYOUT         Value: Alpha
-                    //      Key: TEMPLATE       Value: Model-1234
-                    //      Key: ID             Value: 1
+                    // Iteration #1:    Key: LAYOUT         Value: Alpha
+                    // Iteration #2:    Key: TEMPLATE       Value: Model-1234
+                    // Iteration #3:    Key: ID             Value: 1
 
                     // Here is how you access each key/value pair for each loop iteration 
                     var key = lineItemChunks[i][j].Split(": ", 2)[0];
