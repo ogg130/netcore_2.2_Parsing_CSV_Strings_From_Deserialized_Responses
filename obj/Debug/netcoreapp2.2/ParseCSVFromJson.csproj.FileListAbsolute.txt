@@ -1,0 +1,14 @@
+C:\Users\Robert\source\repos\ParseCSVFromJson\bin\Debug\netcoreapp2.2\ParseCSVFromJson.deps.json
+C:\Users\Robert\source\repos\ParseCSVFromJson\bin\Debug\netcoreapp2.2\ParseCSVFromJson.runtimeconfig.json
+C:\Users\Robert\source\repos\ParseCSVFromJson\bin\Debug\netcoreapp2.2\ParseCSVFromJson.runtimeconfig.dev.json
+C:\Users\Robert\source\repos\ParseCSVFromJson\bin\Debug\netcoreapp2.2\ParseCSVFromJson.dll
+C:\Users\Robert\source\repos\ParseCSVFromJson\bin\Debug\netcoreapp2.2\ParseCSVFromJson.pdb
+C:\Users\Robert\source\repos\ParseCSVFromJson\obj\Debug\netcoreapp2.2\ParseCSVFromJson.csprojAssemblyReference.cache
+C:\Users\Robert\source\repos\ParseCSVFromJson\obj\Debug\netcoreapp2.2\ParseCSVFromJson.csproj.CoreCompileInputs.cache
+C:\Users\Robert\source\repos\ParseCSVFromJson\obj\Debug\netcoreapp2.2\ParseCSVFromJson.RazorAssemblyInfo.cache
+C:\Users\Robert\source\repos\ParseCSVFromJson\obj\Debug\netcoreapp2.2\ParseCSVFromJson.RazorAssemblyInfo.cs
+C:\Users\Robert\source\repos\ParseCSVFromJson\obj\Debug\netcoreapp2.2\ParseCSVFromJson.AssemblyInfoInputs.cache
+C:\Users\Robert\source\repos\ParseCSVFromJson\obj\Debug\netcoreapp2.2\ParseCSVFromJson.AssemblyInfo.cs
+C:\Users\Robert\source\repos\ParseCSVFromJson\obj\Debug\netcoreapp2.2\ParseCSVFromJson.RazorTargetAssemblyInfo.cache
+C:\Users\Robert\source\repos\ParseCSVFromJson\obj\Debug\netcoreapp2.2\ParseCSVFromJson.dll
+C:\Users\Robert\source\repos\ParseCSVFromJson\obj\Debug\netcoreapp2.2\ParseCSVFromJson.pdb
