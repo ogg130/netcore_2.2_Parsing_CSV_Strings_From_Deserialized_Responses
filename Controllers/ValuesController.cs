@@ -39,25 +39,35 @@ namespace ParseCSVFromJson.Controllers
                            "8: HEADER FOR CHUNK:\n" +
                            "LAYOUT: Theta\nTEMPLATE: Model-1001\nID: 7";
 
-            // Split lineItems on the line break(/n) to create a list containing a string representing a key value pair
-            var rawLineItemList = DeserializedApiResponse.lineItems.Split("\n").ToList();
+            // Declare what our chunk header will be and standard delimiter will be
+            var headerName = "HEADER FOR CHUNK:";
+            var delimiter = "\n";
 
-            // Pull the first lineitem of the response into a string so that we can find tokens per lineitem
-            var firstLine = DeserializedApiResponse.lineItems.Split(new string[] { "HEADER FOR CHUNK:\n", "\nHEADER FOR CHUNK:\n" }, StringSplitOptions.None)[1];
+            // Split lineItems on the line break(/n) to create a list containing a string representing a key value pair
+            // Also get the count of rawLineItemList for use later
+            var rawLineItemList = DeserializedApiResponse.lineItems.Split(delimiter).ToList();
+            var rawCount = rawLineItemList.Count;
+
+            // Pull the first lineitem of the response into a string so that we can find tokens per lineitem and create 
+            // delimiters for what will be the beginning and end of the first real line of useful data
+            var firstLineStartDelimiter = $"{headerName}{delimiter}";
+            var firstLineEndDelimiter = $"{delimiter}{headerName}{delimiter}";
+            var firstLine = DeserializedApiResponse.lineItems.Split(
+                new string[] { firstLineStartDelimiter, firstLineEndDelimiter }, StringSplitOptions.None)[1];
 
             // Calculate tokens per lineitem to be used as a loop top end 
             // The -1 is because this pulls 1 more than the tokens per lineitem due to line numbers skewing the results
-            var tokensPerLineItem = firstLine.Split("\n").Count() - 1;
+            var tokensPerLineItem = firstLine.Split(delimiter).Count() - 1;
 
             // Create a list to contain only the data we want to work with - strip out all unecessary lines
             var strippedList = new List<string>();
 
             // Iterate over rawLineItemList
-            // Make a new list containing anything contained between "\nHEADER FOR CHUNK" and "\nHEADER FOR CHUNK":
-            for (var h = 0; h < rawLineItemList.Count; h++)
+            // Make a new list containing anything contained between "HEADER FOR CHUNK" and "HEADER FOR CHUNK":
+            for (var h = 0; h < rawCount; h++)
             {
                 // If we encounter HEADER FOR CHUNK
-                if (!rawLineItemList[h].Contains("HEADER FOR CHUNK:"))
+                if (!rawLineItemList[h].Contains(headerName))
                 {
                     // Continue to the next iteration
                     continue;
@@ -76,19 +86,23 @@ namespace ParseCSVFromJson.Controllers
                         // Add the token to strippedList
                         strippedList.Add(rawLineItemList[h]);
 
-                        //If the next loop iteration would not be larger than the bounds of the list we are looping for
-                        if ((h + 1) < rawLineItemList.Count)
+                        var nextIteration = h + 1;
+
+                        // If the next loop iteration would not be larger than the bounds of the list we are 
+                        //   looping for
+                        if (nextIteration < rawCount)
                         {
-                            // Set header to the value of the next loop iteration (to detect if it contains HEADER FOR CHUNK"
-                            header = rawLineItemList[h + 1];
+                            // Set header to the value of the next loop iteration (to detect if it contains 
+                            //   HEADER FOR CHUNK)
+                            header = rawLineItemList[nextIteration];
                         }
-                        else //If the loop iteration would be out of bounds
+                        else // If the loop iteration would be out of bounds
                         {
                             // Set header so we exit the loop cleanly
-                            header = "HEADER FOR CHUNK:";
+                            header = headerName;
                         }
                     }
-                    while (!header.Contains("HEADER FOR CHUNK:"));
+                    while (!header.Contains(headerName));
                 }
             }
 
