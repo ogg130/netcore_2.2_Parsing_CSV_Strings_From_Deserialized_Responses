@@ -14,30 +14,8 @@ namespace ParseCSVFromJson.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-
             // Simulate a deserialized JSON API response with a delimited list as a field value
-            var DeserializedApiResponse = new Response();
-            DeserializedApiResponse.task = "Install Widgets";
-            DeserializedApiResponse.quantity = 8;
-            DeserializedApiResponse.description = "Installation of 8 different styles of widgets";
-            DeserializedApiResponse.lineItems =
-                           "1: UNECESSARY DATA: 1111\nDATE:11/11/11\n" +
-                           "2: HEADER FOR CHUNK:\n" +
-                           "LAYOUT: Alpha\nTEMPLATE: Model-1234\nID: 1\n" +
-                           "3: HEADER FOR CHUNK:\n" +
-                           "LAYOUT: Beta\nTEMPLATE: Model-4321\nID: 2\n" +
-                           "4: HEADER FOR CHUNK:\n" +
-                           "LAYOUT: Gamma\nTEMPLATE: Model-4444\nID: 3\n" +
-                           "5: HEADER FOR CHUNK:\n" +
-                           "LAYOUT: Delta\nTEMPLATE: Model-1234\nID: 4\n" +
-                           "6: HEADER FOR CHUNK:\n" +
-                           "LAYOUT: Epsilon\nTEMPLATE: Model-3333\nID: 5\n" +
-                           "7: HEADER FOR CHUNK:\n" +
-                           "LAYOUT: Zeta\nTEMPLATE: Model-2222\nID: 5\n" +
-                           "8: HEADER FOR CHUNK:\n" +
-                           "LAYOUT: Eta\nTEMPLATE: Model-1221\nID: 6\n" +
-                           "8: HEADER FOR CHUNK:\n" +
-                           "LAYOUT: Theta\nTEMPLATE: Model-1001\nID: 7";
+            Response mockResponse = MockResponse();
 
             // Declare what our chunk header will be and standard delimiter will be
             var headerName = "HEADER FOR CHUNK:";
@@ -45,14 +23,14 @@ namespace ParseCSVFromJson.Controllers
 
             // Split lineItems on the line break(/n) to create a list containing a string representing a key value pair
             // Also get the count of rawLineItemList for use later
-            var rawLineItemList = DeserializedApiResponse.lineItems.Split(delimiter).ToList();
+            var rawLineItemList = mockResponse.lineItems.Split(delimiter).ToList();
             var rawCount = rawLineItemList.Count;
 
             // Pull the first lineitem of the response into a string so that we can find tokens per lineitem and create 
             // delimiters for what will be the beginning and end of the first real line of useful data
             var firstLineStartDelimiter = $"{headerName}{delimiter}";
             var firstLineEndDelimiter = $"{delimiter}{headerName}{delimiter}";
-            var firstLine = DeserializedApiResponse.lineItems.Split(
+            var firstLine = mockResponse.lineItems.Split(
                 new string[] { firstLineStartDelimiter, firstLineEndDelimiter }, StringSplitOptions.None)[1];
 
             // Calculate tokens per lineitem to be used as a loop top end 
@@ -143,8 +121,35 @@ namespace ParseCSVFromJson.Controllers
             }
 
 
-            
+
             return Ok("hi");
+        }
+
+        private static Response MockResponse()
+        {
+            var MockResponse = new Response();
+            MockResponse.task = "Install Widgets";
+            MockResponse.quantity = 8;
+            MockResponse.description = "Installation of 8 different styles of widgets";
+            MockResponse.lineItems =
+                           "1: UNECESSARY DATA: 1111\nDATE:11/11/11\n" +
+                           "2: HEADER FOR CHUNK:\n" +
+                           "LAYOUT: Alpha\nTEMPLATE: Model-1234\nID: 1\n" +
+                           "3: HEADER FOR CHUNK:\n" +
+                           "LAYOUT: Beta\nTEMPLATE: Model-4321\nID: 2\n" +
+                           "4: HEADER FOR CHUNK:\n" +
+                           "LAYOUT: Gamma\nTEMPLATE: Model-4444\nID: 3\n" +
+                           "5: HEADER FOR CHUNK:\n" +
+                           "LAYOUT: Delta\nTEMPLATE: Model-1234\nID: 4\n" +
+                           "6: HEADER FOR CHUNK:\n" +
+                           "LAYOUT: Epsilon\nTEMPLATE: Model-3333\nID: 5\n" +
+                           "7: HEADER FOR CHUNK:\n" +
+                           "LAYOUT: Zeta\nTEMPLATE: Model-2222\nID: 5\n" +
+                           "8: HEADER FOR CHUNK:\n" +
+                           "LAYOUT: Eta\nTEMPLATE: Model-1221\nID: 6\n" +
+                           "8: HEADER FOR CHUNK:\n" +
+                           "LAYOUT: Theta\nTEMPLATE: Model-1001\nID: 7";
+            return MockResponse;
         }
     }
 }
