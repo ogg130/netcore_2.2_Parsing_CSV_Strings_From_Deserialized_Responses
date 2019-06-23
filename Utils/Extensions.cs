@@ -9,7 +9,7 @@ namespace System
         // https://stackoverflow.com/a/30248074/7147234
         
         // Used to convert a list of list of anything into chunks determed by the size parameter
-        public static List<List<T>> SplitList<T>(this List<T> me, int size = 3)
+        public static List<List<T>> SplitList<T>(this List<T> me, int size)
         {
             var list = new List<List<T>>();
             for (int i = 0; i < me.Count; i += size)

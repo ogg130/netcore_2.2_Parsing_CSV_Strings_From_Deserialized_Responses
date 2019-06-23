@@ -92,7 +92,7 @@ namespace ParseCSVFromJson.Controllers
             }
 
             // Break the stripped list into chunks
-            List<List<string>> lineItemChunks = strippedList.SplitList();
+            List<List<string>> lineItemChunks = strippedList.SplitList(tokensPerLineItem);
 
             // Loop over all chunks
             for (var i = 0; i < lineItemChunks.Count; i++)
