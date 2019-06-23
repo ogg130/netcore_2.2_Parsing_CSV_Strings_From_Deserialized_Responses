@@ -107,8 +107,9 @@ namespace ParseCSVFromJson.Controllers
 
 
                     // Here is an example of how to access each key/value pair for each loop iteration 
-                    var key = lineItemChunks[i][j].Split(": ", 2)[0];
-                    var value = lineItemChunks[i][j].Split(": ", 2)[1];
+                    var kvp = lineItemChunks[i][j].Split(": ", 2);
+                    var key = kvp[0];
+                    var value = kvp[1];
 
                     // This inner loop is looping over each key value pair item in each chunk
 
