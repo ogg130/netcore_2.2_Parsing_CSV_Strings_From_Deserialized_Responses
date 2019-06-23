@@ -21,22 +21,22 @@ namespace ParseCSVFromJson.Controllers
             DeserializedApiResponse.quantity = 8;
             DeserializedApiResponse.description = "Installation of 8 different styles of widgets";
             DeserializedApiResponse.lineItems =
-                           "UNECESSARY DATA: 1111\nDATE:11/11/11\n" +
-                           "HEADER FOR CHUNK:\n" +
+                           "1: UNECESSARY DATA: 1111\nDATE:11/11/11\n" +
+                           "2: HEADER FOR CHUNK:\n" +
                            "LAYOUT: Alpha\nTEMPLATE: Model-1234\nID: 1\n" +
-                           "HEADER FOR CHUNK:\n" +
+                           "3: HEADER FOR CHUNK:\n" +
                            "LAYOUT: Beta\nTEMPLATE: Model-4321\nID: 2\n" +
-                           "HEADER FOR CHUNK:\n" +
+                           "4: HEADER FOR CHUNK:\n" +
                            "LAYOUT: Gamma\nTEMPLATE: Model-4444\nID: 3\n" +
-                           "HEADER FOR CHUNK:\n" +
+                           "5: HEADER FOR CHUNK:\n" +
                            "LAYOUT: Delta\nTEMPLATE: Model-1234\nID: 4\n" +
-                           "HEADER FOR CHUNK:\n" +
+                           "6: HEADER FOR CHUNK:\n" +
                            "LAYOUT: Epsilon\nTEMPLATE: Model-3333\nID: 5\n" +
-                           "HEADER FOR CHUNK:\n" +
+                           "7: HEADER FOR CHUNK:\n" +
                            "LAYOUT: Zeta\nTEMPLATE: Model-2222\nID: 5\n" +
-                           "HEADER FOR CHUNK:\n" +
+                           "8: HEADER FOR CHUNK:\n" +
                            "LAYOUT: Eta\nTEMPLATE: Model-1221\nID: 6\n" +
-                           "HEADER FOR CHUNK:\n" +
+                           "8: HEADER FOR CHUNK:\n" +
                            "LAYOUT: Theta\nTEMPLATE: Model-1001\nID: 7";
 
             // Split lineItems on the line break(/n) to create a list containing a string representing a key value pair
@@ -46,7 +46,8 @@ namespace ParseCSVFromJson.Controllers
             var firstLine = DeserializedApiResponse.lineItems.Split(new string[] { "HEADER FOR CHUNK:\n", "\nHEADER FOR CHUNK:\n" }, StringSplitOptions.None)[1];
 
             // Calculate tokens per lineitem to be used as a loop top end 
-            var tokensPerLineItem = firstLine.Split("\n").Count();
+            // The -1 is because this pulls 1 more than the tokens per lineitem due to line numbers skewing the results
+            var tokensPerLineItem = firstLine.Split("\n").Count() - 1;
 
             // Create a list to contain only the data we want to work with - strip out all unecessary lines
             var strippedList = new List<string>();
