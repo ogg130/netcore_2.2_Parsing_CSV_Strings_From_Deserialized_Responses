@@ -122,7 +122,7 @@ namespace ParseCSVFromJson.Controllers
 
 
 
-            return Ok("hi");
+            return Ok(lineItemChunks);
         }
 
         private static Response MockResponse()
